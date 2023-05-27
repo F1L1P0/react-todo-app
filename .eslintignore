@@ -1,0 +1,14 @@
+*.css
+*.sass
+*.scss
+*.svg
+*.png
+*.jpg
+*.jpeg
+node_modules
+public
+build
+coverage
+storybook-static
+*.d.ts
+*.hbs

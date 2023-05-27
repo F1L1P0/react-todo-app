@@ -1,0 +1,11 @@
+node_modules
+# Ignore artifacts:
+build
+coverage
+storybook-static
+
+# Ignore all HTML files:
+*.html
+
+# Ignore handlebars files:
+*.hbs
