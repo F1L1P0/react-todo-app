@@ -9,7 +9,7 @@ export default function Todo() {
 
     const [todoName, setTodoName] = useState('')
     const [todoDesc, setTodoDesc] = useState('')
-    const [todoTime, setTodoTime] = useState(Date.now())
+    const [todoTime, setTodoTime] = useState(new Date().toLocaleDateString())
 
     const handleSubmit = useCallback(
         (e) => {
