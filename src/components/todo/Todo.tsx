@@ -5,7 +5,7 @@ import { nanoid } from '@reduxjs/toolkit'
 import TodoItems from './TodoItems'
 import { Link } from 'react-router-dom'
 import { ITodo } from '@/redux/todoSlice'
-import { ButtonGroup, Button, TextField } from '@mui/material'
+import { ButtonGroup, Button, TextField, Box, Typography } from '@mui/material'
 import Grid from '@mui/material/Unstable_Grid2/Grid2'
 
 export default function Todo() {
@@ -26,20 +26,14 @@ export default function Todo() {
 
     return (
         <>
-            <Link
-                style={{
-                    color: 'white',
-                    background: 'purple',
-                    width: '100%',
-                    position: 'absolute',
-                    top: 0,
-                    textAlign: 'center',
-                }}
-                to="/pokemon"
-            >
-                GOTO POKEMON PAGE
-            </Link>
-            <h1>TODO app</h1>
+            <Box sx={{ background: 'purple', width: '100%', display: 'flex', justifyContent: 'center' }}>
+                <Link style={{ color: 'white', textAlign: 'center', width: '100%' }} to="/pokemon">
+                    GOTO POKEMON PAGE
+                </Link>
+            </Box>
+            <Typography variant="h1" sx={{ fontSize: '4rem', p: 1 }}>
+                TODO app
+            </Typography>
             <form onSubmit={handleSubmit} style={{ padding: '1rem' }}>
                 <ButtonGroup variant="outlined" aria-label="Functional TODO buttons">
                     <Grid
@@ -51,8 +45,9 @@ export default function Todo() {
                     >
                         <Grid xs={12} sm={4}>
                             <TextField
+                                variant="outlined"
                                 fullWidth
-                                placeholder="Name"
+                                label="Name"
                                 type="text"
                                 id="todoName"
                                 value={todoName}
@@ -61,8 +56,9 @@ export default function Todo() {
                         </Grid>
                         <Grid xs={12} sm={4}>
                             <TextField
+                                variant="outlined"
                                 fullWidth
-                                placeholder="Describtion"
+                                label="Describtion"
                                 type="text"
                                 id="todoDesc"
                                 value={todoDesc}
@@ -71,6 +67,7 @@ export default function Todo() {
                         </Grid>
                         <Grid xs={12} sm={4}>
                             <TextField
+                                variant="outlined"
                                 fullWidth
                                 type="date"
                                 id="todoTime"

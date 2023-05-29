@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/redux/store'
 import { useState } from 'react'
 import { ITodo } from '@/redux/todoSlice'
-import { ButtonGroup, Button, TextField } from '@mui/material'
+import { ButtonGroup, Button, TextField, Box } from '@mui/material'
 import Stack from '@mui/material/Stack'
 
 export default function TodoItem() {
@@ -64,8 +64,8 @@ export default function TodoItem() {
     return (
         <>
             {todos.map((item) => (
-                <div key={item.id} style={todoItemStyle}>
-                    <div>
+                <Box key={item.id} style={todoItemStyle}>
+                    <Box>
                         <p>name: {item.name}</p>
                         <p>describtion: {item.desc}</p>
                         <p>date: {item.time}</p>
@@ -84,20 +84,23 @@ export default function TodoItem() {
                         {todoState.showUpdateTodo && todoState.selectedTodoId === item.id && (
                             <Stack direction={{ md: 'row', sm: 'column' }} spacing={{ xs: 1, md: 3 }}>
                                 <TextField
+                                    variant="outlined"
                                     type="text"
-                                    placeholder="change name"
+                                    label="change name"
                                     value={todoState.updatedTodoName}
                                     onChange={(e) => setTodoState({ ...todoState, updatedTodoName: e.target.value })}
                                 />
                                 <TextField
+                                    variant="outlined"
                                     type="text"
-                                    placeholder="change description"
+                                    label="change description"
                                     value={todoState.updatedTodoDesc}
                                     onChange={(e) => setTodoState({ ...todoState, updatedTodoDesc: e.target.value })}
                                 />
                                 <TextField
+                                    variant="outlined"
                                     type="date"
-                                    placeholder="change time"
+                                    label="change time"
                                     value={todoState.updatedTodoTime}
                                     onChange={(e) => setTodoState({ ...todoState, updatedTodoTime: e.target.value })}
                                 />
@@ -106,8 +109,8 @@ export default function TodoItem() {
                                 </Button>
                             </Stack>
                         )}
-                    </div>
-                </div>
+                    </Box>
+                </Box>
             ))}
         </>
     )
