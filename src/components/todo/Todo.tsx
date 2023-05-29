@@ -26,11 +26,19 @@ export default function Todo() {
 
     return (
         <>
-            <Button color="secondary" variant="contained" fullWidth>
-                <Link style={{ color: 'white' }} to="/pokemon">
-                    GOTO POKEMON PAGE
-                </Link>
-            </Button>
+            <Link
+                style={{
+                    color: 'white',
+                    background: 'purple',
+                    width: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    textAlign: 'center',
+                }}
+                to="/pokemon"
+            >
+                GOTO POKEMON PAGE
+            </Link>
             <h1>TODO app</h1>
             <form onSubmit={handleSubmit} style={{ padding: '1rem' }}>
                 <ButtonGroup variant="outlined" aria-label="Functional TODO buttons">
