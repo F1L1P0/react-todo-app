@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface Todo {
+export interface ITodo {
     id: number | string
     name: string
     desc: string
@@ -8,7 +8,7 @@ export interface Todo {
 }
 
 interface TodoState {
-    todos: Todo[]
+    todos: ITodo[]
 }
 
 const initialState: TodoState = {
@@ -38,7 +38,11 @@ export const todoSlice = createSlice({
     name: 'todo',
     initialState,
     reducers: {
-        addTodo: (state, action: PayloadAction<Todo>) => {
+        addTodo: (state, action: PayloadAction<ITodo>) => {
+            if (!action.payload.name) {
+                alert("You didn't enter a name.")
+                return
+            }
             const newTodo = {
                 id: action.payload.id,
                 name: action.payload.name,
@@ -51,7 +55,11 @@ export const todoSlice = createSlice({
             const todoId = action.payload
             state.todos = state.todos.filter((todo) => todo.id !== todoId)
         },
-        updateTodo: (state, action: PayloadAction<Todo>) => {
+        updateTodo: (state, action: PayloadAction<ITodo>) => {
+            if (!action.payload.name) {
+                alert("You didn't enter a name.")
+                return
+            }
             const todoId = action.payload.id
             const todo = state.todos.find((todo) => todo.id === todoId)
             if (todo) {
