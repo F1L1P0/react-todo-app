@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import axios from 'axios'
 import { Box, Typography, Button } from '@mui/material'
 import { useRef } from 'react'
@@ -30,13 +30,15 @@ export default function Pokemon() {
             <Button variant="contained" onClick={() => fetchPokemon()}>
                 Load more pokemon
             </Button>
-            <ul>
-                {pokemon.map((pokemon) => (
-                    <li style={{ listStyle: 'numeric' }} key={pokemon.name}>
-                        {'-->'} {pokemon.name}
-                    </li>
-                ))}
-            </ul>
+            <Suspense fallback={<p>Loading...</p>}>
+                <ul>
+                    {pokemon.map((pokemon) => (
+                        <li style={{ listStyle: 'numeric' }} key={pokemon.name}>
+                            {'-->'} {pokemon.name}
+                        </li>
+                    ))}
+                </ul>
+            </Suspense>
         </Box>
     )
 }
