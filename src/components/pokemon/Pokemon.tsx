@@ -1,25 +1,40 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
+import { useRef } from 'react'
 
 export default function Pokemon() {
-    const apiPokemonUrl = 'https://pokeapi.co/api/v2/pokemon'
     const [pokemon, setPokemon] = useState<{ name: string }[]>([])
+    const apiPokemonNamesUrl = `https://pokeapi.co/api/v2/pokemon`
+    const [nextUrl, setNextUrl] = useState(apiPokemonNamesUrl)
+    const isMounted = useRef(false)
+
+    async function fetchPokemon() {
+        const response = await axios.get(nextUrl)
+        const pokemonNames = response.data.results
+        setPokemon((prevPokemon) => [...prevPokemon, ...pokemonNames])
+        setNextUrl(response.data.next)
+    }
 
     useEffect(() => {
-        async function fetchPokemon() {
-            const response = await axios.get(apiPokemonUrl)
-            setPokemon(response.data.results)
+        if (!isMounted.current) {
+            isMounted.current = true //prevent double fetching
+            fetchPokemon()
         }
-        fetchPokemon()
     }, [])
 
     return (
-        <Box>
-            <Typography variant="h1">Pokemon</Typography>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
+            <Typography variant="h1">Pokemons</Typography>
+            <Typography variant="h3">Here is list of pokemons from api</Typography>
+            <Button variant="contained" onClick={() => fetchPokemon()}>
+                Load more pokemon
+            </Button>
             <ul>
                 {pokemon.map((pokemon) => (
-                    <li key={pokemon.name}>{pokemon.name}</li>
+                    <li style={{ listStyle: 'numeric' }} key={pokemon.name}>
+                        {'-->'} {pokemon.name}
+                    </li>
                 ))}
             </ul>
         </Box>
